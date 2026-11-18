@@ -53,6 +53,22 @@ app.post("/cadastrar", (request, response) => {
     })
 })
 
+// Apaga uma música pelo id
+app.delete("/apagar/:id", (request, response) => {
+    const { id } = request.params
+
+    const comandoDelete = "DELETE FROM musicas_joseguilherme WHERE id = ?" // troque pelo nome da SUA tabela
+
+    sql.query(comandoDelete, [id], (error) => {
+        if (error) {
+            console.log(error)
+            return
+        }
+
+        response.json({ mensagem: "Música apagada com sucesso!" })
+    })
+})
+
 app.listen(3000, () => {
     console.log("Servidor online")
 })
